@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import "./App.css";  // Assuming you have an App.css file in the same folder
+import React, { createRef, useState } from 'react';
+import './App.css';
 
 const HeaderGenerator = () => {
-  const [companyName, setCompanyName] = useState("The Company Name");
+  const [companyName, setCompanyName] = useState("Eli Lilly and Company");
   const [rootDirectory, setRootDirectory] = useState("");
   const [codePath, setCodePath] = useState("/cloud/production");
   const [codeName, setCodeName] = useState("");
@@ -30,6 +30,35 @@ const HeaderGenerator = () => {
   const [validatorName, setValidatorName] = useState("");
   const [validationDescription, setValidationDescription] = useState("");
   const [headerText, setHeaderText] = useState("");
+
+  // Create refs for each form group
+  const companyNameRef = createRef();
+  const rootDirectoryRef = createRef();
+  const codePathRef = createRef();
+  const projectNameRef = createRef();
+  const descriptionRef = createRef();
+  const specificationPathRef = createRef();
+  const irPathRef = createRef();
+  const origPathRef = createRef();
+  const ccModulesRef = createRef();
+  const softverRef = createRef();
+  const infraRef = createRef();
+  const versionRef = createRef();
+  const additionalInstructionsRef = createRef();
+  const dataInputsPathRef = createRef();
+  const dataOutputPathRef = createRef();
+  const creationDateRef = createRef();
+  const authorNameRef = createRef();
+  const validatorNameRef = createRef();
+
+  // Function to scroll to a specific ref
+  const scrollToRef = (ref) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+
   // R code to be copied
   const [rCode, setRCode] = useState(`pkgs <- sessionInfo()$otherPkgs
   names_and_versions <- data.frame(Package = names(pkgs), Version = unlist(lapply(pkgs, \`[[\`, "Version")))
@@ -193,78 +222,101 @@ ${dataOutputsText || '# DATA OUTPUT             : N/A'}
 
   return (
     <div className="app">
+        <div className="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+          <li onClick={() => scrollToRef(companyNameRef)}>Company Name</li>
+          <li onClick={() => scrollToRef(rootDirectoryRef)}>Root Directory</li>
+          <li onClick={() => scrollToRef(codePathRef)}>Code Path</li>
+          <li onClick={() => scrollToRef(projectNameRef)}>Project Name</li>
+          <li onClick={() => scrollToRef(descriptionRef)}>Description</li>
+          <li onClick={() => scrollToRef(specificationPathRef)}>Specification Path</li>
+          <li onClick={() => scrollToRef(irPathRef)}>Independent Replication Path</li>
+          <li onClick={() => scrollToRef(origPathRef)}>Original Code Path</li>
+          <li onClick={() => scrollToRef(ccModulesRef)}>Component Code Modules</li>
+          <li onClick={() => scrollToRef(softverRef)}>Software/Version#</li>
+          <li onClick={() => scrollToRef(infraRef)}>Infrastructure</li>
+          <li onClick={() => scrollToRef(versionRef)}>Version</li>
+          <li onClick={() => scrollToRef(additionalInstructionsRef)}>Additional Instructions</li>
+          <li onClick={() => scrollToRef(dataInputsPathRef)}>Data Path</li>
+          <li onClick={() => scrollToRef(dataOutputPathRef)}>Data Output Path</li>
+          <li onClick={() => scrollToRef(creationDateRef)}>Creation Date</li>
+          <li onClick={() => scrollToRef(authorNameRef)}>Author Name</li>
+          <li onClick={() => scrollToRef(validatorNameRef)}>Validator Name</li>
+        </ul>
+      </div>
 <form className="form" onSubmit={handleSubmit}>
         <h1>Header Generator</h1>
-        <div className="form-group">
+        <div className="form-group" ref={companyNameRef}>
           <label>Company Name:</label>
           <input type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={rootDirectoryRef}>
           <label>Root Directory:</label>
           <input type="text" value={rootDirectory} onChange={handleRootDirectoryChange} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={codePathRef}>
           <label>Code Path:</label>
           <input type="text" value={codePath} onChange={(e) => setCodePath(e.target.value)} />
           <label>Code Name:</label>
           <input type="file" onChange={handleFileChange} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={projectNameRef}> 
           <label>Project Name:</label>
           <input type="text" value={projectName} onChange={(e) => setProjectName(e.target.value)} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={descriptionRef}>
           <label>Description:</label>
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={specificationPathRef}>
           <label>Specification Path:</label>
           <input type="text" value={specificationPath} onChange={(e) => setSpecificationPath(e.target.value)} />
           <label>Specification File:</label>
           <input type="file" onChange={handleSpecificationFileChange} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={irPathRef}>
           <label>Independent Replication Path:</label>
           <input type="text" value={irPath} onChange={(e) => setIrPath(e.target.value)} />
           <label>Independent Replication Filename:</label>
           <input type="file" onChange={handleIrFileChange} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={origPathRef}>
           <label>Original Code Path:</label>
           <input type="text" value={origPath} onChange={(e) => setOrigPath(e.target.value)} />
           <label>Original Code Filename:</label>
           <input type="file" onChange={handleOrigFileChange} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={ccModulesRef}>
           <label>Component Code Modules:</label>
           <textarea value={ccModules} onChange={(e) => setCcModules(e.target.value)} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={softverRef}>
           <label>Software/Version#:</label>
           <input type="text" value={softver} onChange={(e) => setSoftver(e.target.value)} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={infraRef}>
           <label>Infrastructure:</label>
           <input type="text" value={infra} onChange={(e) => setInfra(e.target.value)} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={additionalInstructionsRef}>
           <label>Additional Instructions:</label>
           <textarea value={additionalInstructions} onChange={(e) => setAdditionalInstructions(e.target.value)} />
           <button type="button" onClick={handleCopyRCode}>Copy R version code to the clipboard</button>
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={dataInputsPathRef}>
           <label>Data Path:</label>
           <input type="text" value={dataInputsPath} onChange={(e) => setDataInputsPath(e.target.value)} />
           <label>Data Input:</label>
           <input type="file" multiple onChange={handleDataInputFilesChange} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={dataOutputPathRef}>
           <label>Data Output Path:</label>
           <input type="text" value={dataOutputPath} onChange={(e) => setDataOutputPath(e.target.value)} />
           <label>Data Output Filename:</label>
           <input type="text" value={dataOutputFilename} onChange={(e) => setDataOutputFilename(e.target.value)} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={creationDateRef}>
           <label>Creation Date:</label>
           <input type="date" value={creationDate} onChange={(e) => setCreationDate(e.target.value)} />
           <label>Version:</label>
@@ -274,7 +326,7 @@ ${dataOutputsText || '# DATA OUTPUT             : N/A'}
           <label>Author Description:</label>
           <input type="text" value={authorDescription} onChange={(e) => setAuthorDescription(e.target.value)} />
         </div>
-        <div className="form-group">
+        <div className="form-group" ref={validatorNameRef}>
           <label>Validator Name:</label>
           <input type="text" value={validatorName} onChange={(e) => setValidatorName(e.target.value)} />
           <label>Validation Description:</label>
