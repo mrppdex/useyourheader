@@ -162,14 +162,14 @@ const HeaderGenerator = () => {
     const dataInputsText = dataInputs.map((dataInput, index) => {
       const fileListText = dataInput.files.map(fileName => `#                           > ${fileName}`).join('\n');
       const prefix = index === 0 ? '# DATA INPUT              :' : '#                          ';
-      return `${prefix} CLOUD: ${dataInput.path || 'N/A'}\n${fileListText}`;
+      return `${prefix} CLUWE: ${dataInput.path || 'N/A'}\n${fileListText}`;
     }).join('\n');
 
     const dataOutputsText = [...dataOutputs, { outputPath: dataOutputPath, outputFilename: dataOutputFilename }]
       .filter((dataOutput) => dataOutput.outputFilename !== "")
       .map((dataOutput, index) => {
         const prefix = index === 0 ? '# DATA OUTPUT             :' : '#                          ';
-        return `${prefix} CLOUD: ${dataOutput.outputPath || 'N/A'}/${dataOutput.outputFilename || 'N/A'}`;
+        return `${prefix} CLUWE: ${dataOutput.outputPath || 'N/A'}/${dataOutput.outputFilename || 'N/A'}`;
       }).join('\n');
 
     handleDataOutputChange();
@@ -193,12 +193,12 @@ const HeaderGenerator = () => {
     const generatedHeaderText = `
 # **soh*****************************************************************************
 # ${companyName || 'N/A'}
-# CODE NAME               : CLOUD: ${codePath}/${codeName || 'N/A'}
+# CODE NAME               : ${codeName ? `CLUWE: ${codePath}/${codeName}` : 'N/A'}
 # PROJECT NAME            : ${projectName || 'N/A'}
 # DESCRIPTION             : ${descriptionText || 'N/A'}
-# SPECIFICATION           : CLOUD: ${specificationPath || 'N/A'}/${specificationFilename || 'N/A'}
-# INDEPENDENT REPLICATION : ${irFilename ? `CLOUD: ${irPath}/${irFilename}` : 'N/A, this is a validation code'}
-# ORIGINAL CODE           : ${origFilename ? `CLOUD: ${origPath}/${origFilename}` : 'N/A, this is an original code'}
+# SPECIFICATION           : ${specificationFilename ? `CLUWE: ${specificationPath}/${specificationFilename}` : 'N/A'}
+# INDEPENDENT REPLICATION : ${irFilename ? `CLUWE: ${irPath}/${irFilename}` : 'N/A, this is a validation code'}
+# ORIGINAL CODE           : ${origFilename ? `CLUWE: ${origPath}/${origFilename}` : 'N/A, this is an original code'}
 # COMPONENT CORE MODULES  : ${ccModuleText || 'N/A'}
 # SOFTWARE/VERSION#       : ${softver || 'N/A'}
 # INFRASTRUCTURE          : ${infra || 'N/A'}
