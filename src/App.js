@@ -83,6 +83,7 @@ const HeaderGenerator = () => {
     }).join('\n');
 
     const dataOutputsText = [...dataOutputs, { outputPath: dataOutputPath, outputFilename: dataOutputFilename }]
+      .filter((dataOutput) => dataOutput.outputFilename !== "")
       .map((dataOutput, index) => {
         const prefix = index === 0 ? '# DATA OUTPUT             :' : '#                          ';
         return `${prefix} CLOUD: ${dataOutput.outputPath || 'N/A'}/${dataOutput.outputFilename || 'N/A'}`;
@@ -119,7 +120,7 @@ const HeaderGenerator = () => {
 # SOFTWARE/VERSION#       : ${softver || 'N/A'}
 # INFRASTRUCTURE          : ${infra || 'N/A'}
 ${dataInputsText || '# DATA INPUT              : N/A'}
-${dataOutputsText || '#'}
+${dataOutputsText || '# DATA OUTPUT             : N/A'}
 # SPECIAL INSTRUCTIONS    : ${additionalInstructionsText || 'N/A'}
 # ----------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------
