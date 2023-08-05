@@ -238,10 +238,10 @@ ${dataOutputsText || '# DATA OUTPUT             : N/A'}
           <li onClick={() => scrollToRef(ccModulesRef)}>Component Code Modules</li>
           <li onClick={() => scrollToRef(softverRef)}>Software/Version#</li>
           <li onClick={() => scrollToRef(infraRef)}>Infrastructure</li>
-          <li onClick={() => scrollToRef(versionRef)}>Version</li>
           <li onClick={() => scrollToRef(additionalInstructionsRef)}>Additional Instructions</li>
           <li onClick={() => scrollToRef(dataInputsPathRef)}>Data Path</li>
           <li onClick={() => scrollToRef(dataOutputPathRef)}>Data Output Path</li>
+          <li onClick={() => scrollToRef(versionRef)}>Version</li>
           <li onClick={() => scrollToRef(creationDateRef)}>Creation Date</li>
           <li onClick={() => scrollToRef(authorNameRef)}>Author Name</li>
           <li onClick={() => scrollToRef(validatorNameRef)}>Validator Name</li>
@@ -318,11 +318,11 @@ ${dataOutputsText || '# DATA OUTPUT             : N/A'}
           <label>Data Output Filename:</label>
           <input type="text" value={dataOutputFilename} onChange={(e) => setDataOutputFilename(e.target.value)} />
         </div>
-        <div className="form-group" ref={creationDateRef}>
-          <label>Creation Date:</label>
-          <input type="date" value={creationDate} onChange={(e) => setCreationDate(e.target.value)} />
-          <label ref={versionRef}>Version:</label>
+        <div className="form-group" ref={versionRef}>
+          <label>Version:</label>
           <input type="text" value={version} onChange={(e) => setVersion(e.target.value)} />
+          <label ref={creationDateRef}>Creation Date:</label>
+          <input type="date" value={creationDate} onChange={(e) => setCreationDate(e.target.value)} />
           <label ref={authorNameRef}>Author Name:</label>
           <input type="text" value={authorName} onChange={(e) => setAuthorName(e.target.value)} />
           <label >Author Description:</label>
