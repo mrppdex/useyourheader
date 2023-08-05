@@ -90,6 +90,7 @@ const HeaderGenerator = () => {
     }
   }
 
+  names_and_versions <- sapply(names_and_versions, function(x) trimws(paste0('> ',x)))
   collapsed_text <- paste(c('Required packages:',names_and_versions), collapse = "\n")
   copy_to_clipboard(collapsed_text)
 
