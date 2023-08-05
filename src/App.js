@@ -197,8 +197,8 @@ const HeaderGenerator = () => {
 # PROJECT NAME            : ${projectName || 'N/A'}
 # DESCRIPTION             : ${descriptionText || 'N/A'}
 # SPECIFICATION           : ${specificationFilename ? `CLUWE: ${specificationPath}/${specificationFilename}` : 'N/A'}
-# INDEPENDENT REPLICATION : ${irFilename ? `CLUWE: ${irPath}/${irFilename}` : 'N/A, this is a validation code'}
-# ORIGINAL CODE           : ${origFilename ? `CLUWE: ${origPath}/${origFilename}` : 'N/A, this is an original code'}
+# INDEPENDENT REPLICATION : ${irFilename ? `CLUWE: ${irPath}/${irFilename}` : 'N/A, this is the validation code'}
+# ORIGINAL CODE           : ${origFilename ? `CLUWE: ${origPath}/${origFilename}` : 'N/A, this is the original code'}
 # COMPONENT CORE MODULES  : ${ccModuleText || 'N/A'}
 # SOFTWARE/VERSION#       : ${softver || 'N/A'}
 # INFRASTRUCTURE          : ${infra || 'N/A'}
