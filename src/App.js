@@ -29,6 +29,47 @@ const HeaderGenerator = () => {
   const [validatorName, setValidatorName] = useState("");
   const [validationDescription, setValidationDescription] = useState("");
   const [headerText, setHeaderText] = useState("");
+  // R code to be copied
+  const [rCode, setRCode] = useState(`pkgs <- sessionInfo()$otherPkgs
+  names_and_versions <- data.frame(Package = names(pkgs), Version = unlist(lapply(pkgs, \`[[\`, "Version")))
+  names_and_versions <- with(names_and_versions, paste(Package,Version))
+
+  print(names_and_versions)
+
+  copy_to_clipboard <- function(my_var) {
+
+    # Determine the system type
+    system_type <- Sys.info()["sysname"]
+
+    if (system_type == "Windows") {
+      # If the system is Windows, use writeClipboard
+      writeClipboard(my_var)
+    } else if (system_type == "Darwin") {
+      # If the system is Mac (Darwin), use pbcopy
+      pipe <- pipe("pbcopy", "w")
+      cat(my_var, file = pipe)
+      close(pipe)
+    } else if (system_type == "Linux") {
+      # If the system is Linux, use xclip or xsel
+      pipe <- pipe("xclip -selection clipboard", "w")
+      cat(my_var, file = pipe)
+      close(pipe)
+    } else {
+      # For other systems
+      print("Unknown system type. Cannot copy to clipboard.")
+    }
+  }
+
+  copy_to_clipboard(names_and_versions)
+
+  print("Go back to the header app and paste data from the clipboard")`);
+
+  // Function to copy the R code to the clipboard
+  const handleCopyRCode = () => {
+    navigator.clipboard.writeText(rCode);
+    alert("R code copied to clipboard. After running it, paste the output in the Component Code Modules field.");
+  };
+
 
   const handleSpecificationFileChange = (e) => {
     if (e.target.files.length > 0) {
@@ -65,7 +106,6 @@ const HeaderGenerator = () => {
       setDataOutputFilename("");
     }
   };
-  
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -182,6 +222,7 @@ ${dataOutputsText || '# DATA OUTPUT             : N/A'}
         <div className="form-group">
           <label>Component Code Modules:</label>
           <textarea value={ccModules} onChange={(e) => setCcModules(e.target.value)} />
+          <button type="button" onClick={handleCopyRCode}>Copy R version code to the clipboard</button>
         </div>
         <div className="form-group">
           <label>Software/Version#:</label>
