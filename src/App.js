@@ -3,6 +3,7 @@ import "./App.css";  // Assuming you have an App.css file in the same folder
 
 const HeaderGenerator = () => {
   const [companyName, setCompanyName] = useState("The Company Name");
+  const [rootDirectory, setRootDirectory] = useState("");
   const [codePath, setCodePath] = useState("/cloud/production");
   const [codeName, setCodeName] = useState("");
   const [projectName, setProjectName] = useState("");
@@ -63,6 +64,17 @@ const HeaderGenerator = () => {
   copy_to_clipboard(names_and_versions)
 
   print("Go back to the header app and paste data from the clipboard")`);
+
+  const handleRootDirectoryChange = (e) => {
+    const newRootDirectory = e.target.value;
+    setRootDirectory(newRootDirectory);
+    setCodePath(newRootDirectory);
+    setSpecificationPath(newRootDirectory);
+    setIrPath(newRootDirectory);
+    setOrigPath(newRootDirectory);
+    setDataInputsPath(newRootDirectory);
+    setDataOutputPath(newRootDirectory);
+  };
 
   // Function to copy the R code to the clipboard
   const handleCopyRCode = () => {
@@ -188,6 +200,10 @@ ${dataOutputsText || '# DATA OUTPUT             : N/A'}
           <input type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
         </div>
         <div className="form-group">
+          <label>Root Directory:</label>
+          <input type="text" value={rootDirectory} onChange={handleRootDirectoryChange} />
+        </div>
+        <div className="form-group">
           <label>Code Path:</label>
           <input type="text" value={codePath} onChange={(e) => setCodePath(e.target.value)} />
           <label>Code Name:</label>
@@ -222,7 +238,6 @@ ${dataOutputsText || '# DATA OUTPUT             : N/A'}
         <div className="form-group">
           <label>Component Code Modules:</label>
           <textarea value={ccModules} onChange={(e) => setCcModules(e.target.value)} />
-          <button type="button" onClick={handleCopyRCode}>Copy R version code to the clipboard</button>
         </div>
         <div className="form-group">
           <label>Software/Version#:</label>
@@ -235,6 +250,7 @@ ${dataOutputsText || '# DATA OUTPUT             : N/A'}
         <div className="form-group">
           <label>Additional Instructions:</label>
           <textarea value={additionalInstructions} onChange={(e) => setAdditionalInstructions(e.target.value)} />
+          <button type="button" onClick={handleCopyRCode}>Copy R version code to the clipboard</button>
         </div>
         <div className="form-group">
           <label>Data Path:</label>
