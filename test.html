@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
+  height: 300px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.box {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #000;
+  margin: 10px;
+}
+
+.box1 { background-color: lightblue; }
+.box2 { background-color: lightgreen; }
+.box3 { background-color: lightpink; }
+
+@media screen and (max-width: 600px) {
+  .container {
+    flex-direction: row;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="box box1">1</div>
+  <div class="box box2">2</div>
+  <div class="box box3">3</div>
+</div>
+
+</body>
+</html>

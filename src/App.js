@@ -90,7 +90,8 @@ const HeaderGenerator = () => {
     }
   }
 
-  copy_to_clipboard(names_and_versions)
+  collapsed_text <- paste(c('Required packages:',names_and_versions), collapse = "\n")
+  copy_to_clipboard(collapsed_text)
 
   print("Go back to the header app and paste data from the clipboard")`);
 
@@ -319,11 +320,11 @@ ${dataOutputsText || '# DATA OUTPUT             : N/A'}
         <div className="form-group" ref={creationDateRef}>
           <label>Creation Date:</label>
           <input type="date" value={creationDate} onChange={(e) => setCreationDate(e.target.value)} />
-          <label>Version:</label>
+          <label ref={versionRef}>Version:</label>
           <input type="text" value={version} onChange={(e) => setVersion(e.target.value)} />
-          <label>Author Name:</label>
+          <label ref={authorNameRef}>Author Name:</label>
           <input type="text" value={authorName} onChange={(e) => setAuthorName(e.target.value)} />
-          <label>Author Description:</label>
+          <label >Author Description:</label>
           <input type="text" value={authorDescription} onChange={(e) => setAuthorDescription(e.target.value)} />
         </div>
         <div className="form-group" ref={validatorNameRef}>
