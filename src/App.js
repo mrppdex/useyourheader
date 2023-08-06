@@ -80,10 +80,8 @@ const HeaderGenerator = () => {
       cat(my_var, file = pipe)
       close(pipe)
     } else if (system_type == "Linux") {
-      # If the system is Linux, use xclip or xsel
-      pipe <- pipe("xclip -selection clipboard", "w")
-      cat(my_var, file = pipe)
-      close(pipe)
+      cat("You are using Linux. Copy the below information to clipboard:\n\n")
+      cat(my_var, "\n\n")
     } else {
       # For other systems
       print("Unknown system type. Cannot copy to clipboard.")
@@ -106,6 +104,10 @@ const HeaderGenerator = () => {
     setDataInputsPath(newRootDirectory);
     setDataOutputPath(newRootDirectory);
   };
+
+  const formatPath = (path) => {
+    return path.replace(/\\/g, '/').replace(/.*:/,'/lillyce');
+  }
 
   // Function to copy the R code to the clipboard
   const handleCopyRCode = () => {
@@ -139,13 +141,13 @@ const HeaderGenerator = () => {
   };
 
   const handleDataInputFilesChange = (e) => {
-    setDataInputs([...dataInputs, {path: dataInputsPath, files: Array.from(e.target.files, file => file.name)}]);
+    setDataInputs([...dataInputs, {path: formatPath(dataInputsPath), files: Array.from(e.target.files, file => file.name)}]);
     e.target.value = null;  // Clear the file input
   };
 
   const handleDataOutputChange = (e) => {
     if (dataOutputFilename !== "") {
-      setDataOutputs([...dataOutputs, { outputPath: dataOutputPath, outputFilename: dataOutputFilename }]);
+      setDataOutputs([...dataOutputs, { outputPath: formatPath(dataOutputPath), outputFilename: dataOutputFilename }]);
       setDataOutputFilename("");
     }
   };
@@ -193,12 +195,12 @@ const HeaderGenerator = () => {
     const generatedHeaderText = `
 # **soh*****************************************************************************
 # ${companyName || 'N/A'}
-# CODE NAME               : ${codeName ? `CLUWE: ${codePath}/${codeName}` : 'N/A'}
+# CODE NAME               : ${codeName ? `CLUWE: ${formatPath(codePath)}/${codeName}` : 'N/A'}
 # PROJECT NAME            : ${projectName || 'N/A'}
 # DESCRIPTION             : ${descriptionText || 'N/A'}
 # SPECIFICATION           : ${specificationFilename ? `CLUWE: ${specificationPath}/${specificationFilename}` : 'N/A'}
-# INDEPENDENT REPLICATION : ${irFilename ? `CLUWE: ${irPath}/${irFilename}` : 'N/A, this is the validation code'}
-# ORIGINAL CODE           : ${origFilename ? `CLUWE: ${origPath}/${origFilename}` : 'N/A, this is the original code'}
+# INDEPENDENT REPLICATION : ${irFilename ? `CLUWE: ${formatPath(irPath)}/${irFilename}` : 'N/A, this is the validation code'}
+# ORIGINAL CODE           : ${origFilename ? `CLUWE: ${formatPath(origPath)}/${origFilename}` : 'N/A, this is the original code'}
 # COMPONENT CORE MODULES  : ${ccModuleText || 'N/A'}
 # SOFTWARE/VERSION#       : ${softver || 'N/A'}
 # INFRASTRUCTURE          : ${infra || 'N/A'}
