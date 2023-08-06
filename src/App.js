@@ -96,6 +96,7 @@ const HeaderGenerator = () => {
 
   const handleRootDirectoryChange = (e) => {
     const newRootDirectory = e.target.value;
+    setRootDirectory(newRootDirectory);
     setCodePath(newRootDirectory);
     setSpecificationPath(newRootDirectory);
     setIrPath(newRootDirectory);
