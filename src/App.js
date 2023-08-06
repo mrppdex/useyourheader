@@ -96,7 +96,6 @@ const HeaderGenerator = () => {
 
   const handleRootDirectoryChange = (e) => {
     const newRootDirectory = e.target.value;
-    setRootDirectory(newRootDirectory);
     setCodePath(newRootDirectory);
     setSpecificationPath(newRootDirectory);
     setIrPath(newRootDirectory);
@@ -145,13 +144,6 @@ const HeaderGenerator = () => {
     e.target.value = null;  // Clear the file input
   };
 
-  const handleDataOutputChange = (e) => {
-    if (dataOutputFilename !== "") {
-      setDataOutputs([...dataOutputs, { outputPath: formatPath(dataOutputPath), outputFilename: dataOutputFilename }]);
-      setDataOutputFilename("");
-    }
-  };
-
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     return new Date(dateString).toLocaleDateString(undefined, options).split('/').reverse().join('-');
@@ -167,14 +159,12 @@ const HeaderGenerator = () => {
       return `${prefix} CLUWE: ${dataInput.path || 'N/A'}\n${fileListText}`;
     }).join('\n');
 
-    const dataOutputsText = [...dataOutputs, { outputPath: dataOutputPath, outputFilename: dataOutputFilename }]
+    const dataOutputsText = [...dataOutputs, { outputPath: formatPath(dataOutputPath), outputFilename: dataOutputFilename }]
       .filter((dataOutput) => dataOutput.outputFilename !== "")
       .map((dataOutput, index) => {
         const prefix = index === 0 ? '# DATA OUTPUT             :' : '#                          ';
         return `${prefix} CLUWE: ${dataOutput.outputPath || 'N/A'}/${dataOutput.outputFilename || 'N/A'}`;
       }).join('\n');
-
-    handleDataOutputChange();
     
     const words = description.split(' ');
     let descriptionLines = [''];
@@ -198,7 +188,7 @@ const HeaderGenerator = () => {
 # CODE NAME               : ${codeName ? `CLUWE: ${formatPath(codePath)}/${codeName}` : 'N/A'}
 # PROJECT NAME            : ${projectName || 'N/A'}
 # DESCRIPTION             : ${descriptionText || 'N/A'}
-# SPECIFICATION           : ${specificationFilename ? `CLUWE: ${specificationPath}/${specificationFilename}` : 'N/A'}
+# SPECIFICATION           : ${specificationFilename ? `CLUWE: ${formatPath(specificationPath)}/${specificationFilename}` : 'N/A'}
 # INDEPENDENT REPLICATION : ${irFilename ? `CLUWE: ${formatPath(irPath)}/${irFilename}` : 'N/A, this is the validation code'}
 # ORIGINAL CODE           : ${origFilename ? `CLUWE: ${formatPath(origPath)}/${origFilename}` : 'N/A, this is the original code'}
 # COMPONENT CORE MODULES  : ${ccModuleText || 'N/A'}
