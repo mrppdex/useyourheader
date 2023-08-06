@@ -106,7 +106,7 @@ const HeaderGenerator = () => {
   };
 
   const formatPath = (path) => {
-    return path.replace(/\\/g, '/').replace(/.*:/,'/lillyce');
+    return path.replace(/\\/g, '/').replace(/.*:/,`${rootDirectory ? rootDirectory: '/lillyce'}`);
   }
 
   // Function to copy the R code to the clipboard
