@@ -150,6 +150,13 @@ const HeaderGenerator = () => {
     return new Date(dateString).toLocaleDateString(undefined, options).split('/').reverse().join('-');
   }
 
+  const handleDataOutputChange = (e) => {
+    if (dataOutputFilename !== "") {
+      setDataOutputs([...dataOutputs, { outputPath: formatPath(dataOutputPath), outputFilename: dataOutputFilename }]);
+      setDataOutputFilename("");
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -176,6 +183,9 @@ const HeaderGenerator = () => {
         descriptionLines.push(word);
       }
     }
+
+    handleDataOutputChange();
+
     const descriptionText = descriptionLines.join('\n#                           ').trim();
 
     let ccModuleLines = ccModules.split('\n');
