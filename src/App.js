@@ -106,7 +106,7 @@ const HeaderGenerator = () => {
   };
 
   const formatPath = (path) => {
-    return path.replace(/\\/g, '/').replace(/.*:/,`${rootDirectory ? rootDirectory: '/lillyce'}`);
+    return path.replace(/\\/g, '/').replace(/.*:/,`${rootDirectory || '/lillyce'}`);
   }
 
   // Function to copy the R code to the clipboard
@@ -196,12 +196,12 @@ const HeaderGenerator = () => {
     const generatedHeaderText = `
 # **soh*****************************************************************************
 # ${companyName || 'N/A'}
-# CODE NAME               : ${codeName ? `CLUWE: ${formatPath(codePath)}/${codeName}` : 'N/A'}
+# CODE NAME               : ${codeName ? `CLUWE: ${formatPath(codePath)}\n#                           > ${codeName}` : 'N/A'}
 # PROJECT NAME            : ${projectName || 'N/A'}
 # DESCRIPTION             : ${descriptionText || 'N/A'}
-# SPECIFICATION           : ${specificationFilename ? `CLUWE: ${formatPath(specificationPath)}/${specificationFilename}` : 'N/A'}
-# INDEPENDENT REPLICATION : ${irFilename ? `CLUWE: ${formatPath(irPath)}/${irFilename}` : 'N/A, this is the validation code'}
-# ORIGINAL CODE           : ${origFilename ? `CLUWE: ${formatPath(origPath)}/${origFilename}` : 'N/A, this is the original code'}
+# SPECIFICATION           : ${specificationFilename ? `CLUWE: ${formatPath(specificationPath)}\n#                           > ${specificationFilename}` : 'N/A'}
+# INDEPENDENT REPLICATION : ${irFilename ? `CLUWE: ${formatPath(irPath)}\n#                           > ${irFilename}` : 'N/A, this is the validation code'}
+# ORIGINAL CODE           : ${origFilename ? `CLUWE: ${formatPath(origPath)}\n#                           > ${origFilename}` : 'N/A, this is the original code'}
 # COMPONENT CORE MODULES  : ${ccModuleText || 'N/A'}
 # SOFTWARE/VERSION#       : ${softver || 'N/A'}
 # INFRASTRUCTURE          : ${infra || 'N/A'}
