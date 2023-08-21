@@ -89,7 +89,9 @@ const HeaderGenerator = () => {
   }
 
   names_and_versions <- sapply(names_and_versions, function(x) trimws(paste0('> ',x)))
-  collapsed_text <- paste(c('Required packages:',names_and_versions), collapse = "\n")
+  collapsed_text <- paste(c('Program assumes correct CLUWE permissions/access mechanisms have been established.', 
+                            'The following non-base R packages must be installed (dependencies not listed):',
+                          names_and_versions), collapse = "\n")
   copy_to_clipboard(collapsed_text)
 
   print("Go back to the header app and paste data from the clipboard")`);
