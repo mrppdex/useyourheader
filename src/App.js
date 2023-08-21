@@ -112,7 +112,7 @@ const HeaderGenerator = () => {
   // Function to copy the R code to the clipboard
   const handleCopyRCode = () => {
     navigator.clipboard.writeText(rCode);
-    alert("R code copied to clipboard. After running it, paste the output in the Component Code Modules field.");
+    alert("R code copied to clipboard. After running it, paste the output in the Additional Instructions field.");
   };
 
 
